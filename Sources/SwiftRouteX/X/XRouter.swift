@@ -15,7 +15,7 @@ public protocol XRouterConfigable{
 public class XRouter: ObservableObject, RouterManagerable{
     
     @MainActor
-    static let shared = XRouter()
+    public static let shared = XRouter()
     
     public var router: Router = Router(root: .constant(nil))
     
