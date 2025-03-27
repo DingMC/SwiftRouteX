@@ -22,27 +22,31 @@ public protocol RouterManagerable: AnyObject{
     //路由模块表，初始化时调用registerModuleList方法自动完成注册
     var moduleList: [RouterModulable.Type]{get set}
     
-    init()
 }
 
 public extension RouterManagerable{
-    
-    static func buildRouter() -> Self {
-        let instance = Self.init()
-        instance.registerModuleList()
-        return instance
-    }
-
     //路由模块表，初始化时调用registerModuleList方法自动完成注册
     func registerModuleList(){
         for item in self.moduleList{
             self.registerRouterModule(item)
         }
     }
-    
-    //路由模块注册
+    //路由模块按需注册
+    func registeRouterModules(moduleList: [RouterModulable.Type]){
+        for item in moduleList{
+            self.registerRouterModule(item)
+        }
+    }
+    //路由模块按需注册
     func registerRouterModule<T: RouterModulable>(_ type: T.Type){
         for item in type.routers{
+            self.registerRouter(item)
+        }
+    }
+    
+    //路由注册，可以按需进行路由注册，实现动态路由
+    func registerRouters(_ routers: [Routerable.Type]){
+        for item in routers{
             self.registerRouter(item)
         }
     }
