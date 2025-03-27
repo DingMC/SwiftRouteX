@@ -30,15 +30,21 @@ public extension View{
         XRouter.shared.registerRouters(config.routerList)
         XRouter.shared.registeRouterModules(moduleList: config.moduleList)
         
-        return XRoutingView(router: XRouter.shared.router) {
+        return XRoutingView(router: XRouter.shared) {
             self
         }.environmentObject(XRouter.shared)
     }
     
-    func useRoute<T: RouterManagerable & ObservableObject>(_ manager: T) -> some View{
-        XRoutingView(router: manager.router) {
-            self
-        }.environmentObject(manager)
-    }
+//    func useRoute<T: RouterManagerable & ObservableObject>(_ manager: T) -> some View{
+//        XRoutingView(router: manager.router) {
+//            self
+//        }.environmentObject(manager)
+//    }
 
 }
+
+//TODO:
+//1、router
+//2、自定义导航栏
+//3、自定义转场动画
+//4、自定义通用必备组件：Alert、Sheet、Loading、Message（自动消失）、Notification（可选是否消失，可选位置）

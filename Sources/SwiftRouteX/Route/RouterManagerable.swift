@@ -85,7 +85,16 @@ public extension RouterManagerable{
     func pop(to prev: Int = 1){
         self.router.pop(to: prev)
     }
+    func pop<T: View>(to type: T.Type){
+        self.router.pop(to: type)
+    }
     func popToRoot(){
        self.router.popToRoot()
+    }
+    func remove<T: View>(of type: T.Type) {
+        self.router.remove(of: type)
+    }
+    func removePrev<T: View>(to type: T.Type) {
+        self.router.removePrev(to: type)
     }
 }

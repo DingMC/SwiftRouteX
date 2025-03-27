@@ -83,8 +83,19 @@ public extension Router {
         state.navigationPath = []
     }
     
-    // 移除当前页面前到某个页面结束的页面（根据视图类型）
+    // 移除某个页面
     func remove<T: View>(of type: T.Type) {
+        var newPath = [RouterPathView]()
+        for (i, item) in state.navigationPath.enumerated(){
+            if item.isView(type){
+                state.navigationPath.remove(at: i)
+                break
+            }
+        }
+    }
+    
+    // 移除当前页面前到某个页面结束的页面（根据视图类型）
+    func removePrev<T: View>(to type: T.Type) {
         var newPath = [RouterPathView]()
         for item in state.navigationPath{
             if item.isView(type){
